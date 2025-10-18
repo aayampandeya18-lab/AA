@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Something Special 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at center, #100022, #000);
+      color: #fff;
+      overflow: hidden;
+      height: 100vh;
+      text-align: center;
+      transition: background 1s ease;
+    }
+
+    .container, .second-screen, .page2, .page3, .page4 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    .hidden { display: none; }
+    .fade { opacity: 0; transition: opacity 0.8s ease; }
+    .show { opacity: 1; }
+
+    .panda, .bear {
+      font-size: clamp(60px, 15vw, 100px);
+      animation: bounce 1.5s infinite;
+    }
+    .text { font-size: clamp(16px, 5vw, 22px); color: #ff8bf3; margin-top: 10px; }
+
+    .dots span {
+      height: 8px;
+      width: 8px;
+      background-color: #ff4be0;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 3px;
+      animation: blink 1.4s infinite both;
+    }
+    .dots span:nth-child(2) { animation-delay: 0.2s; }
+    .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    .second-screen h2 {
+      font-size: clamp(20px, 6vw, 28px);
+      padding: 0 15px;
+    }
+    .second-screen h2 span { color: #ff8bf3; }
+
+    #begin-btn {
+      background: linear-gradient(90deg, #ff4be0, #a34bff);
+      border: none;
+      padding: 14px 35px;
+      border-radius: 30px;
+      color: white;
+      font-size: clamp(16px, 5vw, 20px);
+      cursor: pointer;
+      margin-top: 20px;
+      transition: transform 0.2s;
+    }
+    #begin-btn:hover { transform: scale(1.05); }
+
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes blink { 0%, 80%, 100% { opacity: 0; } 40% { opacity: 1; } }
+
+    /* Page 2 */
+    .page2 {
+      background-color: #f7e1d7;
+      color: #333;
+      width: 100%;
+      height: 100vh;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .input-container input {
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 80%;
+      max-width: 350px;
+      outline: none;
+    }
+
+    .btn-ok {
+      background-color: #f08a5d;
+      color: white;
+      padding: 14px 35px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    /* Page 3 */
+    .page3 {
+      display: none;
+      background-color: #f7e1d7;
+      color: #333;
+      width: 100%;
+      height: 100vh;
+      padding-top: 60px;
+      overflow-y: auto;
+    }
+
+    .happy-birthday-message {
+      font-size: clamp(26px, 6vw, 34px);
+      color: #f08a5d;
+      margin-bottom: 20px;
+    }
+
+    .wish-box {
+      background-color: black;
+      color: white;
+      width: 85%;
+      margin: 0 auto;
+      padding: 20px;
+      font-size: 18px;
+      border-radius: 10px;
+      min-height: 150px;
+      text-align: left;
+    }
+
+    .btn-next {
+      background-color: #f08a5d;
+      color: white;
+      padding: 14px 35px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+      margin-top: 30px;
+    }
+    .btn-next:hover { background-color: #d7634b; }
+
+    /* Page 4 */
+    .page4 {
+      display: none;
+      background-color: #ffccd9;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .circle-container {
+      position: relative;
+      width: min(90vw, 400px);
+      height: min(90vw, 400px);
+      margin: 100px auto 0;
+      perspective: 1000px;
+    }
+
+    .circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      transform-style: preserve-3d;
+      animation: rotate 20s linear infinite;
+    }
+
+    .circle img {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      object-fit: cover;
+    }
+
+    .center-text {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #ffffff;
+      font-size: clamp(26px, 7vw, 40px);
+      font-weight: bold;
+      text-align: center;
+      white-space: pre-line;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    @keyframes rotate {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🐼 First Screen -->
+  <div class="container intro show" id="intro">
+    <div class="panda">🐼</div>
+    <p class="text">Something special is coming for you beautiful...</p>
+    <div class="dots"><span></span><span></span><span></span></div>
+  </div>
+
+  <!-- 🐻‍❄️ Second Screen -->
+  <div class="second-screen hidden" id="second-screen">
+    <div class="bear">🐻‍❄️</div>
+    <h2>I have something <span>special</span> for you...</h2>
+    <p>Something that will like ✨</p>
+    <button id="begin-btn">💖 Tap to Begin</button>
+  </div>
+
+  <!-- Page 2 -->
+  <div class="container page2" id="page2">
+    <div class="input-container">
+      <input type="text" id="nameInput" placeholder="Enter your name" />
+      <button class="btn-ok" onclick="goToPage3()">OK</button>
+    </div>
+  </div>
+
+  <!-- Page 3 -->
+  <div class="container page3" id="page3">
+    <div class="happy-birthday-message">
+      <span id="greetingMessage">Happy Birthday!</span>
+    </div>
+    <div class="wish-box" contenteditable="true">
+      Happiest birthday to the most beautiful girl I know❤️❤️❤️.I wish you a long and healthy life.
+
+I never thought i could be so obsessed with someone,but ever since I met you,you spark a light on my heart✨. I'm so glad that you came into my life. You're truly special and i wish you all the happiness in the world🌟.I feel so lucky to have you as a part of my friend.I hope your day is filled with endless laughter and all the love you deserve✨.
+
+May this year bring peace for your heart, success for your dreams, and memories you’ll never forget. Keep being that kind, silly, and strong person everyone adores 💕.Never stop being you!!
+
+Once again happy birthday to this beautiful lady🎈.You truly deserve the best😍✨.  
+    </div>
+    <button class="btn-next" onclick="goToPage4()">Next</button>
+    <audio id="music3" src="video1.mp4" loop></audio>
+  </div>
+
+  <!-- Page 4 -->
+  <div class="container page4" id="page4">
+    <div class="circle-container">
+      <div class="circle">
+        <img src="image1.jpeg" style="transform: rotateY(0deg) translateZ(200px);">
+        <img src="image2.jpeg" style="transform: rotateY(45deg) translateZ(200px);">
+        <img src="image3.jpeg" style="transform: rotateY(90deg) translateZ(200px);">
+        <img src="image4.jpeg" style="transform: rotateY(135deg) translateZ(200px);">
+        <img src="image5.jpeg" style="transform: rotateY(180deg) translateZ(200px);">
+        <img src="image6.jpeg" style="transform: rotateY(225deg) translateZ(200px);">
+        <img src="image7.jpeg" style="transform: rotateY(270deg) translateZ(200px);">
+        <img src="image8.jpeg" style="transform: rotateY(315deg) translateZ(200px);">
+      </div>
+      <div class="center-text" id="finalGreeting"></div>
+    </div>
+    <audio id="music4" src="video.mp4" loop></audio>
+  </div>
+
+  <script>
+    let userName = "";
+
+    function stopAllMusic() {
+      document.querySelectorAll("audio").forEach(a => {
+        a.pause();
+        a.currentTime = 0;
+      });
+    }
+
+    // Intro → Second Screen
+    setTimeout(() => {
+      document.getElementById("intro").classList.add("hidden");
+      document.getElementById("second-screen").classList.remove("hidden");
+    }, 4000);
+
+    // Second → Page 2
+    document.getElementById('begin-btn').addEventListener('click', () => {
+      document.getElementById('second-screen').style.display = 'none';
+      document.getElementById('page2').style.display = 'flex';
+      document.body.style.background = '#f7e1d7';
+      document.body.style.color = '#333';
+    });
+
+    // Page 2 → Page 3
+    function goToPage3() {
+      const name = document.getElementById('nameInput').value.trim();
+      if (name) {
+        userName = name;
+        document.getElementById('page2').style.display = 'none';
+        document.getElementById('page3').style.display = 'block';
+        document.getElementById('greetingMessage').innerText = "Happy Birthday, " + name + "!";
+        stopAllMusic();
+        document.getElementById('music3').play().catch(()=>{});
+      } else {
+        alert("Please enter your name.");
+      }
+    }
+
+    // Page 3 → Page 4
+    function goToPage4() {
+      document.getElementById('page3').style.display = 'none';
+      document.getElementById('page4').style.display = 'block';
+      document.getElementById('finalGreeting').innerText = "Happy Birthday\n" + userName + "!";
+      stopAllMusic();
+      document.getElementById('music4').play().catch(()=>{});
+    }
+  </script>
+</body>
+</html>
